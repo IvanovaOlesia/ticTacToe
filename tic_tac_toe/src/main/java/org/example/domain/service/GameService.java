@@ -6,12 +6,9 @@ import org.example.domain.model.Position;
 import java.util.UUID;
 
 public interface GameService {
-    void getNextMove();
-    boolean isValidGameBoard();
-    boolean isWin();
-    void  setPositionOnBoard(Position position);
-    Game  newGame();
-    Game getGame();
+    void getNextMove(Game game);
+    boolean isValidGameBoard(UUID id, Game game);
+    boolean isWin(Game game);
     public Game getGame(UUID id);
-    public void save(Game game);
+    public Game newGame();
 }

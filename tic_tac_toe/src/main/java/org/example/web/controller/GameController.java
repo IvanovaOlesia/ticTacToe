@@ -20,9 +20,8 @@ public class GameController {
         return ResponseEntity.ok(gameService.newGame().getGameBoard().getBoard());
     }
     @PutMapping("/move")//{id}/
-    public ResponseEntity<int[][]> update(  @RequestBody Position position) { //@PathVariable("id") UUID id
-        gameService.setPositionOnBoard(position);
-        gameService.getNextMove();
+    public ResponseEntity<int[][]> update(  @RequestBody Game game) { //@PathVariable("id") UUID id
+        gameService.getNextMove(game);
 return ResponseEntity.ok(gameService.getGame().getGameBoard().getBoard());
     }
 }
