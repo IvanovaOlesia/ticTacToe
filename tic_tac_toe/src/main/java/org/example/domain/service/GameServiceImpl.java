@@ -18,23 +18,23 @@ public class GameServiceImpl implements GameService{
 
     @Override
     public void getNextMove(Game game) {
-        Position position = MinMax.bestMove(game.getGameBoard().getBoard());
+        Position position = bestMove(game.getGameBoard().getBoard());
         game.getGameBoard().getBoard()[position.getRow()][position.getCol()] = -1;
     }
 
     @Override
     public boolean isValidGameBoard(UUID id, Game game) {
 
-      int  numberOfDiscrepancies = 0;
-       Game currentGame = gameRepository.get(id);
-       int[][] currentBoard = currentGame.getGameBoard().getBoard();
-       int[][] newBoard = game.getGameBoard().getBoard();
-       for (int row = 0; row < 3; row++) {
-           for (int col = 0; col < 3; col++) {
-               if (currentBoard[row][col] != newBoard[row][col]) numberOfDiscrepancies++;
-           }
-       }
-       return numberOfDiscrepancies <= 1;
+        int  numberOfDiscrepancies = 0;
+        Game currentGame = gameRepository.get(id);
+        int[][] currentBoard = currentGame.getGameBoard().getBoard();
+        int[][] newBoard = game.getGameBoard().getBoard();
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                if (currentBoard[row][col] != newBoard[row][col]) numberOfDiscrepancies++;
+            }
+        }
+        return numberOfDiscrepancies <= 1;
     }
 
 
@@ -61,7 +61,7 @@ public class GameServiceImpl implements GameService{
     }
 
     public Game getGame(UUID id) {
-        return gameRepository.get(id);
+        return  gameRepository.get(id);
     }
     public Game newGame() {
         Game game = new Game();
@@ -187,5 +187,4 @@ public class GameServiceImpl implements GameService{
         }
         return boardCopy;
     }
-}
 }

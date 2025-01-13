@@ -6,6 +6,8 @@ import lombok.Data;
 import java.util.UUID;
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Game {
     private UUID id;
     private GameBoard gameBoard;

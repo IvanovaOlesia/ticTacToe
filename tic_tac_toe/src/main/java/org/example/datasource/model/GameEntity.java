@@ -9,6 +9,8 @@ import java.util.UUID;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class GameEntity {
     private UUID id;
     private int[][] board;
