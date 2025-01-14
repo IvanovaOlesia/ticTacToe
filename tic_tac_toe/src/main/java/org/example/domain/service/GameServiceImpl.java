@@ -6,6 +6,7 @@ import org.example.domain.model.Game;
 import org.example.domain.model.Position;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.UUID;
 
 @Service
@@ -18,17 +19,17 @@ public class GameServiceImpl implements GameService{
 
     @Override
     public void getNextMove(Game game) {
-        Position position = bestMove(game.getGameBoard().getBoard());
-        game.getGameBoard().getBoard()[position.getRow()][position.getCol()] = -1;
+        Position position = bestMove(game.getBoard());
+        game.getBoard()[position.getRow()][position.getCol()] = -1;
+        gameRepository.update(game);
     }
 
     @Override
     public boolean isValidGameBoard(UUID id, Game game) {
-
         int  numberOfDiscrepancies = 0;
         Game currentGame = gameRepository.get(id);
-        int[][] currentBoard = currentGame.getGameBoard().getBoard();
-        int[][] newBoard = game.getGameBoard().getBoard();
+        int[][] currentBoard = currentGame.getBoard();
+        int[][] newBoard = game.getBoard();
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
                 if (currentBoard[row][col] != newBoard[row][col]) numberOfDiscrepancies++;
@@ -40,7 +41,7 @@ public class GameServiceImpl implements GameService{
 
     @Override
     public boolean isWin(Game game) {
-        int [][] board = game.getGameBoard().getBoard();
+        int [][] board = game.getBoard();
         for (int row = 0; row < 3; row++) {
             if (board[row][0] == board[row][1] && board[row][1] == board[row][2]) {
                 if (board[row][0] == COMPUTER || board[row][0] == PLAYER) return true;

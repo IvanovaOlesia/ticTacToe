@@ -1,7 +1,6 @@
 package org.example.domain.service;
 
 import org.example.domain.model.Game;
-import org.example.domain.model.Position;
 
 import java.util.UUID;
 

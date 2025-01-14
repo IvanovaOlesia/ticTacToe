@@ -2,7 +2,7 @@ package org.example.datasource.model;
 
 
 
-import lombok.Builder;
+import lombok.*;
 import lombok.Data;
 
 import java.util.UUID;

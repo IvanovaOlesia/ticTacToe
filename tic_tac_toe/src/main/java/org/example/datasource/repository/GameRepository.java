@@ -3,9 +3,9 @@ package org.example.datasource.repository;
 import org.example.datasource.mapper.GameMapper;
 import org.example.datasource.model.GameEntity;
 import org.example.domain.model.Game;
-import org.example.web.mapper.GameMapperDTO;
 import org.springframework.stereotype.Repository;
 
+import java.util.Arrays;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -18,5 +18,11 @@ public class GameRepository {
     }
     public Game get(UUID id) {
         return GameMapper.fromEntity(storage.get(id));
+    }
+    public void update(Game game){
+        storage.computeIfPresent(game.getId(), (uuid, entity) -> {
+            entity.setBoard(game.getBoard());
+            return entity;
+        });
     }
 }

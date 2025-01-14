@@ -1,30 +1,21 @@
 package org.example.domain.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 @Data
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 public class Game {
     private UUID id;
-    private GameBoard gameBoard;
+    private int[][] board;
     public Game() {
         this.id = UUID.randomUUID();
-        this.gameBoard = new GameBoard();
+        this.board = new int[3][3];
     }
-//
-//    public GameBoard getGameBoard() {
-//        return gameBoard;
-//    }
-//
-//    public int getSeedAtPosition(Position position) {
-//        return gameBoard.getBoard()[position.getRow()][position.getCol()];
-//    }
-//    public void setSeedAtPosition(Position position, int seed) {
-//        gameBoard.getBoard()[position.getRow()][position.getCol()] = seed;
-//    }
+
 
 }
