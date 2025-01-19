@@ -22,11 +22,20 @@ public class GameController {
         return new ResponseEntity<>( GameMapperDTO.toDTO(gameService.newGame()), HttpStatus.OK );
     }
     @PutMapping("/move/{id}")
-    public ResponseEntity<GameDTO> update(@RequestBody GameDTO gameDTO, @PathVariable UUID id) {
+    public ResponseEntity<?> update(@RequestBody GameDTO gameDTO, @PathVariable UUID id) {
         Game game = GameMapperDTO.fromDTO(gameDTO);
         if (gameService.isValidGameBoard(id, game)){
             gameService.getNextMove(game);
-            return new ResponseEntity<>(gameDTO, HttpStatus.OK);
+            int isWin = gameService.isWin(game.getBoard());
+            if (isWin == 10) {
+                return new ResponseEntity<>("You win!", HttpStatus.OK);
+            } else if (isWin == -10) {
+                return new ResponseEntity<>("You lose!", HttpStatus.OK);
+            }else if(gameService.isBoardFull(game.getBoard())) {
+                return new ResponseEntity<>("Draw!", HttpStatus.OK);
+            }else {
+                return new ResponseEntity<>(gameDTO, HttpStatus.OK);
+            }
         }else{
             return new ResponseEntity<>(gameDTO, HttpStatus.BAD_REQUEST);
         }

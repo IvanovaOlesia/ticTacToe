@@ -13,10 +13,10 @@ repositories {
     mavenCentral()
 }
 //./gradlew bootRun
+//sudo systemctl start tomcat
+//sudo systemctl stop tomcat
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
     implementation("org.projectlombok:lombok:1.18.36")
     annotationProcessor("org.projectlombok:lombok:1.18.36")
     implementation(kotlin("stdlib-jdk8"))

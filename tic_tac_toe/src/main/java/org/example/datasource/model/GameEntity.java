@@ -1,7 +1,6 @@
 package org.example.datasource.model;
 
 
-
 import lombok.*;
 import lombok.Data;
 
