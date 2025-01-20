@@ -23,6 +23,7 @@ public class GameController {
     }
     @PutMapping("/move/{id}")
     public ResponseEntity<?> update(@RequestBody GameDTO gameDTO, @PathVariable UUID id) {
+        if(gameDTO==null) return new ResponseEntity<>("Invalid board", HttpStatus.BAD_REQUEST);
         Game game = GameMapperDTO.fromDTO(gameDTO);
         if (gameService.isValidGameBoard(id, game)){
             gameService.getNextMove(game);
@@ -37,7 +38,7 @@ public class GameController {
                 return new ResponseEntity<>(gameDTO, HttpStatus.OK);
             }
         }else{
-            return new ResponseEntity<>(gameDTO, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Invalid board", HttpStatus.BAD_REQUEST);
         }
 
     }

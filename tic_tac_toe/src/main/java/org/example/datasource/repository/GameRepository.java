@@ -17,7 +17,12 @@ public class GameRepository {
         storage.put(game.getId(), GameMapper.toEntity(game));
     }
     public Game get(UUID id) {
-        return GameMapper.fromEntity(storage.get(id));
+        GameEntity gameEntity = storage.get(id);
+        if (gameEntity == null) {
+            return null;
+        }else{
+            return GameMapper.fromEntity(gameEntity);
+        }
     }
     public void update(Game game){
         storage.computeIfPresent(game.getId(), (uuid, entity) -> {

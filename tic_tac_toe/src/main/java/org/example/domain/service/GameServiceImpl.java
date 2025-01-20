@@ -28,6 +28,7 @@ public class GameServiceImpl implements GameService{
     public boolean isValidGameBoard(UUID id, Game game) {
         int  numberOfDiscrepancies = 0;
         Game currentGame = gameRepository.get(id);
+        if (currentGame == null) return false;
         int[][] currentBoard = currentGame.getBoard();
         int[][] newBoard = game.getBoard();
         for (int row = 0; row < 3; row++) {
