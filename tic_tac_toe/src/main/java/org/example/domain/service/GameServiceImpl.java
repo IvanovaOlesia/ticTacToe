@@ -1,6 +1,7 @@
 package org.example.domain.service;
 
 import lombok.AllArgsConstructor;
+import org.example.datasource.mapper.GameMapper;
 import org.example.datasource.repository.GameRepository;
 import org.example.domain.model.Game;
 import org.example.domain.model.Position;
@@ -17,18 +18,21 @@ public class GameServiceImpl implements GameService{
     public  final int COMPUTER = -1;
     public final int EMPTY = 0;
 
+    public Game newGame() {
+        return GameMapper.fromEntity( gameRepository.save(GameMapper.toEntity(new Game())));
+    }
+
     @Override
     public void getNextMove(Game game) {
         Position position = bestMove(game.getBoard());
         game.getBoard()[position.getRow()][position.getCol()] = -1;
-        gameRepository.update(game);
+        gameRepository.save( GameMapper.toEntity(game));
     }
 
     @Override
     public boolean isValidGameBoard(UUID id, Game game) {
         int  numberOfDiscrepancies = 0;
-        Game currentGame = gameRepository.get(id);
-        if (currentGame == null) return false;
+        Game currentGame = GameMapper.fromEntity( gameRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Game not found")));
         int[][] currentBoard = currentGame.getBoard();
         int[][] newBoard = game.getBoard();
         for (int row = 0; row < 3; row++) {
@@ -65,14 +69,10 @@ public class GameServiceImpl implements GameService{
         return 0;
     }
 
-    public Game getGame(UUID id) {
-        return  gameRepository.get(id);
-    }
-    public Game newGame() {
-        Game game = new Game();
-        gameRepository.save(game);
-        return game;
-    }
+//    public Game getGame(UUID id) {
+//        return  gameRepository.get(id);
+//    }
+
 
     public Position bestMove(int[][] gameBoard) {
         int bestVal = Integer.MIN_VALUE;
@@ -127,31 +127,6 @@ public class GameServiceImpl implements GameService{
 
     }
 
-//    public static int evaluate(int[][] board) {
-//
-//        for (int row = 0; row < 3; row++) {
-//            if (board[row][0] == board[row][1] && board[row][1] == board[row][2]) {
-//                if (board[row][0] == COMPUTER) return 10;
-//                else if (board[row][0] == PLAYER) return -10;
-//            }
-//            if (board[0][row] == board[1][row] && board[1][row] == board[2][row]) {
-//                if (board[0][row] == COMPUTER) return 10;
-//                else if (board[0][row] == PLAYER) return -10;
-//            }
-//        }
-//
-//        if (board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
-//            if (board[0][0] == COMPUTER) return 10;
-//            else if (board[0][0] == PLAYER) return -10;
-//        }
-//        if (board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
-//            if (board[0][2] == COMPUTER) return 10;
-//            else if (board[0][2] == PLAYER) return -10;
-//        }
-//
-//        return 0;
-//    }
-    // Метод для проверки, заполнена ли доска
     public boolean isBoardFull(int[][] board) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {

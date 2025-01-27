@@ -17,7 +17,9 @@ repositories {
 //sudo systemctl stop tomcat
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.projectlombok:lombok:1.18.36")
+    implementation("org.postgresql:postgresql:42.6.0")
     annotationProcessor("org.projectlombok:lombok:1.18.36")
     implementation(kotlin("stdlib-jdk8"))
 }

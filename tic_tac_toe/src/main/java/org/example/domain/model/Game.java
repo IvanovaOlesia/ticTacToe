@@ -13,7 +13,7 @@ public class Game {
     private UUID id;
     private int[][] board;
     public Game() {
-        this.id = UUID.randomUUID();
+//        this.id = UUID.randomUUID();
         this.board = new int[3][3];
     }
 
