@@ -2,7 +2,7 @@ package org.example.web.controller;
 
 import lombok.AllArgsConstructor;
 import org.example.domain.model.Game;
-import org.example.domain.service.GameService;
+import org.example.services.gameService.GameService;
 import org.example.web.dto.GameDTO;
 import org.example.web.mapper.GameMapperDTO;
 import org.springframework.http.HttpStatus;

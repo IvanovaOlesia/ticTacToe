@@ -1,4 +1,4 @@
-package org.example.domain.service;
+package org.example.services.gameService;
 
 import lombok.AllArgsConstructor;
 import org.example.datasource.mapper.GameMapper;
@@ -7,7 +7,6 @@ import org.example.domain.model.Game;
 import org.example.domain.model.Position;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.UUID;
 
 @Service
