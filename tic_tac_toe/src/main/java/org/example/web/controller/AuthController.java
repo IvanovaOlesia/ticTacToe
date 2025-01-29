@@ -2,10 +2,8 @@ package org.example.web.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.example.datasource.model.SignUpRequest;
+import org.example.domain.model.SignUpRequest;
 import org.example.services.userService.UserService;
-import org.example.services.userService.UserServiceImp;
-import org.example.web.dto.UserDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +12,7 @@ import java.util.Base64;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/auth")
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthController {
@@ -22,7 +21,7 @@ public class AuthController {
     public ResponseEntity<Boolean> register(@RequestBody SignUpRequest signUpRequest){
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.singUp(signUpRequest));
     }
-    @GetMapping("signIn")
+    @GetMapping("/signIn")
     public ResponseEntity<UUID> authenticate(@RequestHeader("Authorization") String authHeader){
         if (authHeader == null || authHeader.startsWith("Basic ")){
            throw new RuntimeException("The Authorization header is missing");
@@ -34,6 +33,6 @@ public class AuthController {
         }
         String login = values[0];
         String password = values[1];
-        userService.signIn(login, password);
+       return ResponseEntity.status(HttpStatus.OK).body(userService.signIn(login, password));
     }
 }

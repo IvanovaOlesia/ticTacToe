@@ -23,4 +23,8 @@ public class UserEntity {
     private UUID id;
     private String login;
     private String password;
+    public UserEntity(String login, String password){
+        this.login = login;
+        this.password = password;
+    }
 }

@@ -1,16 +1,22 @@
 package org.example.services.userService;
 
-import org.example.datasource.model.SignUpRequest;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import lombok.AllArgsConstructor;
+import org.example.datasource.model.UserEntity;
+import org.example.domain.model.SignUpRequest;
+import org.example.datasource.repository.UserRepository;
+import org.example.web.dto.UserDTO;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
-
+@Service
+@AllArgsConstructor
 public class UserServiceImp implements UserService {
-    private PasswordEncoder passwordEncoder;
+    private UserRepository userRepository;
 
     @Override
     public boolean singUp(SignUpRequest signUpRequest) {
-        return false;
+        userRepository.save(new UserEntity( signUpRequest.getLogin(),signUpRequest.getPassword() ) );
+        return true;
     }
 
     @Override

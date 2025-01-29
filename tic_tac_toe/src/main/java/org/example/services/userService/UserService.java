@@ -1,6 +1,6 @@
 package org.example.services.userService;
 
-import org.example.datasource.model.SignUpRequest;
+import org.example.domain.model.SignUpRequest;
 
 import java.util.UUID;
 
