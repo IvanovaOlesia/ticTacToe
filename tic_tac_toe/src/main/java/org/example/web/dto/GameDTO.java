@@ -12,6 +12,5 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GameDTO {
-    UUID id;
     int[][] board;
 }
