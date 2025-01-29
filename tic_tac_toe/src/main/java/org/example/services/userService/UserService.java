@@ -6,5 +6,5 @@ import java.util.UUID;
 
 public interface UserService {
     boolean singUp(SignUpRequest signUpRequest);
-    UUID signIn(SignUpRequest signUpRequest);
+    UUID signIn(String login,String password);
 }

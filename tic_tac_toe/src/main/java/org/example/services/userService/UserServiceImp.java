@@ -1,6 +1,7 @@
 package org.example.services.userService;
 
 import org.example.datasource.model.SignUpRequest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.UUID;
 
@@ -13,7 +14,7 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public UUID signIn(SignUpRequest signUpRequest) {
+    public UUID signIn(String login,String password) {
         return null;
     }
 }
