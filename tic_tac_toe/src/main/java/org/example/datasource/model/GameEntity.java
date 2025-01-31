@@ -7,56 +7,72 @@ import lombok.*;
 import lombok.Data;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.Arrays;
 import java.util.UUID;
 
 
-//@Builder
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name="Games")
-@Getter
-@Setter
+@Data
+@Builder
 public class GameEntity {
     @Id
     @GeneratedValue
     @UuidGenerator
     private UUID id;
-    @Lob
-    private String boardJson;
-    @Transient
-    private  int[][] board;
-//    @Builder.Default
-    @Transient
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+//    @Lob
 
-public GameEntity(UUID id, int[][] board) {
-    this.id = id;
-    this.board = board;
-    try {
-        boardJson = objectMapper.writeValueAsString(board);
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
-    public int[][] getBoard() {
-        if (boardJson == null) return null;
-        try {
-            board = objectMapper.readValue(boardJson, int[][].class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return board;
-    }
+//
+//    private String boardJson;
+//    @Transient
 
-    public void setBoard(int[][] board) {
-        this.board = board;
-        try {
-            boardJson = objectMapper.writeValueAsString(board);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    @Column(columnDefinition = "integer[]")
+    private  int[] board;
+//    @Transient
+//    private static final ObjectMapper objectMapper = new ObjectMapper();
+//    @PostLoad
+//    private void initBoard() {
+//        if (boardJson != null) {
+//            try {
+//                board = objectMapper.readValue(boardJson, int[][].class);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+
+//public GameEntity(UUID id, int[][] board) {
+//    this.id = id;
+//    this.board = board;
+//    try {
+//        boardJson = objectMapper.writeValueAsString(board);
+//    } catch (Exception e) {
+//        e.printStackTrace();
+//    }
+//}
+//    public int[][] getBoard() {
+//        if (boardJson != null && board == null) {
+//            try {
+//                board = objectMapper.readValue(boardJson, int[][].class);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return board;
+//    }
+//
+//    public void setBoard(int[][] board) {
+//        this.board = board;
+//        try {
+//            boardJson = objectMapper.writeValueAsString(board);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
 }

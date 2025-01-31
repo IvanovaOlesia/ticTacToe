@@ -18,19 +18,20 @@ public class GameController {
     private  GameService gameService;
 
     @GetMapping("/start")
-    public ResponseEntity<GameDTO> start() {
-        return new ResponseEntity<>( GameMapperDTO.toDTO(gameService.newGame()), HttpStatus.OK );
+    public ResponseEntity<Game> start() {
+        return new ResponseEntity<>( gameService.newGame(), HttpStatus.OK );
     }
     @PutMapping("/move/{id}")
     public ResponseEntity<?> update(@RequestBody GameDTO gameDTO, @PathVariable UUID id) {
         if(gameDTO==null) return new ResponseEntity<>("Invalid board", HttpStatus.BAD_REQUEST);
         Game game = GameMapperDTO.fromDTO(gameDTO);
+        game.setId(id);
         if (gameService.isValidGameBoard(id, game)){
             gameService.getNextMove(game);
             int isWin = gameService.isWin(game.getBoard());
-            if (isWin == 10) {
+            if (isWin == -10) {
                 return new ResponseEntity<>("You win!", HttpStatus.OK);
-            } else if (isWin == -10) {
+            } else if (isWin == 10) {
                 return new ResponseEntity<>("You lose!", HttpStatus.OK);
             }else if(gameService.isBoardFull(game.getBoard())) {
                 return new ResponseEntity<>("Draw!", HttpStatus.OK);

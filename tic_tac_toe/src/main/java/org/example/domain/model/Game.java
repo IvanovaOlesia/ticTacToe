@@ -11,10 +11,10 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Game {
     private UUID id;
-    private int[][] board;
+    private int[]board;
     public Game() {
 //        this.id = UUID.randomUUID();
-        this.board = new int[3][3];
+        this.board = new int[9];
     }
 
 
