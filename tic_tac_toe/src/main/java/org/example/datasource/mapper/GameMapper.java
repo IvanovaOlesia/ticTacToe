@@ -1,6 +1,5 @@
 package org.example.datasource.mapper;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.datasource.model.GameEntity;
 import org.example.domain.model.Game;
 

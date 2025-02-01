@@ -1,8 +1,7 @@
 package org.example.web.controller;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.example.domain.model.SignUpRequest;
+import org.example.web.dto.SignUpRequest;
 import org.example.services.userService.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

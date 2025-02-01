@@ -29,7 +29,6 @@ public class AuthFilter extends GenericFilterBean {
         String base64Credentials = authHeader.substring("Basic ".length());
         String credentials = new String(Base64.getDecoder().decode(base64Credentials));
 
-        // Разделяем "логин:пароль"
         String[] values = credentials.split(":", 2);
         if (values.length != 2) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid Authorization header format");

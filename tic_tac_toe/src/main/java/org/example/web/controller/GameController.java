@@ -27,20 +27,26 @@ public class GameController {
         Game game = GameMapperDTO.fromDTO(gameDTO);
         game.setId(id);
         if (gameService.isValidGameBoard(id, game)){
-            gameService.getNextMove(game);
-            int isWin = gameService.isWin(game.getBoard());
-            if (isWin == -10) {
-                return new ResponseEntity<>("You win!", HttpStatus.OK);
-            } else if (isWin == 10) {
-                return new ResponseEntity<>("You lose!", HttpStatus.OK);
-            }else if(gameService.isBoardFull(game.getBoard())) {
-                return new ResponseEntity<>("Draw!", HttpStatus.OK);
-            }else {
-                return new ResponseEntity<>(gameDTO, HttpStatus.OK);
-            }
+             return checkGameStatus(game, gameDTO);
         }else{
             return new ResponseEntity<>("Invalid board", HttpStatus.BAD_REQUEST);
         }
 
     }
+
+    private ResponseEntity<?> checkGameStatus(Game game, GameDTO gameDTO) {
+        gameService.getNextMove(game);
+        int isWin = gameService.isWin(game.getBoard());
+        if (isWin == -10) {
+            return new ResponseEntity<>("You win!", HttpStatus.OK);
+        } else if (isWin == 10) {
+            return new ResponseEntity<>("You lose!", HttpStatus.OK);
+        }else if(gameService.isBoardFull(game.getBoard())) {
+            return new ResponseEntity<>("Draw!", HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(gameDTO, HttpStatus.OK);
+        }
+    }
+
+
 }

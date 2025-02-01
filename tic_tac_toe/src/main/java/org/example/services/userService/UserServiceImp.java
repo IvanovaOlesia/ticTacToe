@@ -2,7 +2,7 @@ package org.example.services.userService;
 
 import lombok.AllArgsConstructor;
 import org.example.datasource.model.UserEntity;
-import org.example.domain.model.SignUpRequest;
+import org.example.web.dto.SignUpRequest;
 import org.example.datasource.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

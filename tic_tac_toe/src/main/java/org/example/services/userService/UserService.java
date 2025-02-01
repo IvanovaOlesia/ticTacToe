@@ -1,7 +1,6 @@
 package org.example.services.userService;
 
-import org.example.domain.model.SignUpRequest;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.example.web.dto.SignUpRequest;
 
 import java.util.UUID;
 
