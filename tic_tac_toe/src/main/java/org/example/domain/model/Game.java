@@ -10,9 +10,9 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Game {
     private UUID id;
-    private int[]board;
+    private int[][] board;
     public Game() {
-        this.board = new int[9];
+        this.board = new int[3][3];
     }
 
 

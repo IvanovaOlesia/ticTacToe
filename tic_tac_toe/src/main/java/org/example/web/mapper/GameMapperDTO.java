@@ -14,4 +14,6 @@ public class GameMapperDTO {
                 .board(game.getBoard())
                 .build();
     }
+
+
 }
