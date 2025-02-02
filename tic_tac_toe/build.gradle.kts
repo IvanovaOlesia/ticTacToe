@@ -19,6 +19,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.projectlombok:lombok:1.18.36")
     implementation("org.postgresql:postgresql:42.6.0")
     annotationProcessor("org.projectlombok:lombok:1.18.36")
@@ -30,4 +31,11 @@ tasks.test {
 }
 kotlin {
     jvmToolchain(23)
+}
+tasks.withType<JavaCompile> {
+    options.compilerArgs.add("--enable-preview")
+}
+
+tasks.withType<JavaExec> {
+    jvmArgs("--enable-preview")
 }

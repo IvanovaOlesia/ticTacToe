@@ -1,5 +1,6 @@
 package org.example.services.gameService;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.example.datasource.mapper.GameMapper;
 import org.example.datasource.repository.GameRepository;
@@ -102,18 +103,21 @@ public class GameServiceImpl implements GameService {
     @Override
     public boolean isValidGameBoard(UUID id, Game game) {
         int numberOfDiscrepancies = 0;
-        Game currentGame = GameMapper.fromEntity(gameRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Game not found")));
+        Game currentGame = GameMapper.fromEntity(gameRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Game with id " + id + " not found")));
         int[][] currentBoard = currentGame.getBoard();
         int[][] newBoard = game.getBoard();
         for (int i = 0; i < NUM_ROWS; i++) {
             for (int j = 0; j < NUM_COLUMNS; j++) {
-                if (currentBoard[i][j] != newBoard[i][j]) {
+                if (newBoard[i][j] != EMPTY && newBoard[i][j] != COMPUTER && newBoard[i][j] != PLAYER) {
+                    return false;
+                }else  if ((currentBoard[i][j] == PLAYER && newBoard[i][j] == COMPUTER) || (currentBoard[i][j] == COMPUTER && newBoard[i][j] == PLAYER)) {
+                    return false;
+                }else  if (currentBoard[i][j] != newBoard[i][j]) {
                     numberOfDiscrepancies++;
                 }
             }
-
         }
-        return numberOfDiscrepancies <= 1;
+        return numberOfDiscrepancies == 1;
     }
 
 
