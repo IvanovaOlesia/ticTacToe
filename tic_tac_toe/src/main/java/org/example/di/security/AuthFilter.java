@@ -19,6 +19,12 @@ public class AuthFilter extends GenericFilterBean {
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
+        String path = request.getRequestURI();
+
+        if (path.startsWith("/auth/signUp")) {
+            filterChain.doFilter(servletRequest, servletResponse);
+            return;
+        }
 
         String authHeader =  request.getHeader("Authorization");
 
