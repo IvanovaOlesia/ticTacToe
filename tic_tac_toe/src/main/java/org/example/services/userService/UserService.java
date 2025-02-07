@@ -1,10 +1,11 @@
 package org.example.services.userService;
 
-import org.example.web.dto.SignUpRequest;
+import org.example.datasource.model.UserEntity;
 
 import java.util.UUID;
 
 public interface UserService {
-    boolean singUp(SignUpRequest signUpRequest);
-    UUID signIn(String login,String password);
+    UserEntity save(UserEntity user);
+    boolean create(UserEntity user);
+    UserEntity getByUsername(String username);
 }

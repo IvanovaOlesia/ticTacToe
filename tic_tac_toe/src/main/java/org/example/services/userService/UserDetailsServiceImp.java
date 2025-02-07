@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class JpaUserDetailsService implements UserDetailsService {
+public class UserDetailsServiceImp implements UserDetailsService {
     private final UserRepository userRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-            return userRepository.findByLogin(username)
-                    .map(user -> User.withUsername(user.getLogin())
+            return userRepository.findByUsername(username)
+                    .map(user -> User.withUsername(user.getUsername())
                             .password(user.getPassword())
                             .build())
                     .orElseThrow(() -> new UsernameNotFoundException("User not found"));

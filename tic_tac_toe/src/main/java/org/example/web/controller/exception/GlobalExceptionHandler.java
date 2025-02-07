@@ -48,4 +48,8 @@ public class GlobalExceptionHandler {
                 ex.getValue(), ex.getRequiredType().getSimpleName());
         return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }

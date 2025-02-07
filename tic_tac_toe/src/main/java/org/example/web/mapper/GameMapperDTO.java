@@ -4,6 +4,7 @@ import org.example.domain.model.Game;
 import org.example.web.dto.GameDTO;
 
 public class GameMapperDTO {
+    private GameMapperDTO(){}
     public static GameDTO toDTO(Game game){
         return GameDTO.builder()
                 .board(game.getBoard())
