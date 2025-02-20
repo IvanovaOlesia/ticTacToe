@@ -11,13 +11,13 @@ import org.hibernate.annotations.UuidGenerator;
 import java.util.UUID;
 
 
-
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name="Games")
-@Data
 @Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class GameEntity {
     @Id
     @GeneratedValue
